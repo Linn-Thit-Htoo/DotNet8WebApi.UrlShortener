@@ -1,19 +1,18 @@
 ﻿using DotNet8WebApi.UrlShortener.Models;
 
-namespace DotNet8WebApi.UrlShortener.Services
+namespace DotNet8WebApi.UrlShortener.Services;
+
+public class UrlShortenerService : IUrlShortenerService
 {
-    public class UrlShortenerService : IUrlShortenerService
+    private readonly AppDbContext _context;
+
+    public UrlShortenerService(AppDbContext context)
     {
-        private readonly AppDbContext _context;
+        _context = context;
+    }
 
-        public UrlShortenerService(AppDbContext context)
-        {
-            _context = context;
-        }
-
-        public Task<string> ShortenUrl(UrlRequestDTO urlRequest, CancellationToken cs)
-        {
-            throw new NotImplementedException();
-        }
+    public Task<string> ShortenUrl(UrlRequestDTO urlRequest, CancellationToken cs)
+    {
+        throw new NotImplementedException();
     }
 }
