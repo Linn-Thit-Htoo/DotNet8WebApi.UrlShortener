@@ -2,14 +2,10 @@
 
 public partial class AppDbContext : DbContext
 {
-    public AppDbContext()
-    {
-    }
+    public AppDbContext() { }
 
     public AppDbContext(DbContextOptions<AppDbContext> options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     public virtual DbSet<TblUrl> TblUrls { get; set; }
 
