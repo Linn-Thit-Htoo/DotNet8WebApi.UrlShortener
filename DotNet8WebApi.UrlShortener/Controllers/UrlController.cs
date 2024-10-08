@@ -17,6 +17,20 @@ namespace DotNet8WebApi.UrlShortener.Controllers
             _urlShortenerService = urlShortenerService;
         }
 
+        [HttpGet("{code}")]
+        public async Task<IActionResult> GetLongUrl(string code, CancellationToken cs)
+        {
+            try
+            {
+                string longUrl = await _urlShortenerService.GetLongUrl(code, cs);
+                return Ok(longUrl);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> ShortenUrl([FromBody] UrlRequestDTO urlRequest, CancellationToken cs)
         {
