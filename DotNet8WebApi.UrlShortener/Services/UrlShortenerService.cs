@@ -1,4 +1,5 @@
 ﻿using DotNet8WebApi.UrlShortener.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DotNet8WebApi.UrlShortener.Services;
 
@@ -11,6 +12,21 @@ public class UrlShortenerService : IUrlShortenerService
     {
         _context = context;
         _configuration = configuration;
+    }
+
+    public async Task<string> GetLongUrl(string code, CancellationToken cs)
+    {
+        try
+        {
+            var item = await _context.TblUrls.FirstOrDefaultAsync(x => x.Code == code, cancellationToken: cs);
+            ArgumentNullException.ThrowIfNull(item);
+
+            return item.LongUrl;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
     }
 
     public async Task<string> ShortenUrl(UrlRequestDTO urlRequest, CancellationToken cs)
