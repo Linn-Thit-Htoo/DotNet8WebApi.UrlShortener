@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace DotNet8WebApi.UrlShortener.Models;
+﻿namespace DotNet8WebApi.UrlShortener.Models;
 
 public partial class TblUrl
 {
