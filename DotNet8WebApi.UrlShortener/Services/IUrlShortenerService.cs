@@ -1,6 +1,4 @@
-﻿using DotNet8WebApi.UrlShortener.Models;
-
-namespace DotNet8WebApi.UrlShortener.Services
+﻿namespace DotNet8WebApi.UrlShortener.Services
 {
     public interface IUrlShortenerService
     {
