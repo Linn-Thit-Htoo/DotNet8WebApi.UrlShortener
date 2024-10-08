@@ -1,47 +1,46 @@
-﻿namespace DotNet8WebApi.UrlShortener.Controllers
+﻿namespace DotNet8WebApi.UrlShortener.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class UrlController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class UrlController : ControllerBase
+    private readonly IUrlShortenerService _urlShortenerService;
+
+    public UrlController(IUrlShortenerService urlShortenerService)
     {
-        private readonly IUrlShortenerService _urlShortenerService;
+        _urlShortenerService = urlShortenerService;
+    }
 
-        public UrlController(IUrlShortenerService urlShortenerService)
+    [HttpGet("{code}")]
+    public async Task<IActionResult> GetLongUrl(string code, CancellationToken cs)
+    {
+        try
         {
-            _urlShortenerService = urlShortenerService;
+            string longUrl = await _urlShortenerService.GetLongUrl(code, cs);
+            return Ok(longUrl);
         }
-
-        [HttpGet("{code}")]
-        public async Task<IActionResult> GetLongUrl(string code, CancellationToken cs)
+        catch (Exception ex)
         {
-            try
-            {
-                string longUrl = await _urlShortenerService.GetLongUrl(code, cs);
-                return Ok(longUrl);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            throw new Exception(ex.Message);
         }
+    }
 
-        [HttpPost]
-        public async Task<IActionResult> ShortenUrl([FromBody] UrlRequestDTO urlRequest, CancellationToken cs)
+    [HttpPost]
+    public async Task<IActionResult> ShortenUrl([FromBody] UrlRequestDTO urlRequest, CancellationToken cs)
+    {
+        try
         {
-            try
+            if (string.IsNullOrEmpty(urlRequest.LongUrl))
             {
-                if (string.IsNullOrEmpty(urlRequest.LongUrl))
-                {
-                    return BadRequest("Long Url cannot be empty.");
-                }
+                return BadRequest("Long Url cannot be empty.");
+            }
 
-                string shortUrl = await _urlShortenerService.ShortenUrl(urlRequest, cs);
-                return Ok(shortUrl);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            string shortUrl = await _urlShortenerService.ShortenUrl(urlRequest, cs);
+            return Ok(shortUrl);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
         }
     }
 }
