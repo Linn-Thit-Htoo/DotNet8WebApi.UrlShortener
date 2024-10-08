@@ -6,11 +6,15 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors();
 
-builder.Services.AddDbContext<AppDbContext>(opt =>
-{
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"));
-    opt.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-}, ServiceLifetime.Transient, ServiceLifetime.Transient);
+builder.Services.AddDbContext<AppDbContext>(
+    opt =>
+    {
+        opt.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"));
+        opt.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+    },
+    ServiceLifetime.Transient,
+    ServiceLifetime.Transient
+);
 
 builder.Services.AddScoped<IUrlShortenerService, UrlShortenerService>();
 
