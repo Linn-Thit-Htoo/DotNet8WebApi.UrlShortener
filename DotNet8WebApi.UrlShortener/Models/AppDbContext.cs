@@ -24,7 +24,7 @@ public partial class AppDbContext : DbContext
             entity.ToTable("Tbl_Url");
 
             entity.Property(e => e.Id).HasMaxLength(50);
-            entity.Property(e => e.Code).HasMaxLength(20);
+            entity.Property(e => e.Code).HasMaxLength(50);
             entity.Property(e => e.CreatedDate).HasColumnType("datetime");
             entity.Property(e => e.ShortUrl).HasMaxLength(50);
         });
