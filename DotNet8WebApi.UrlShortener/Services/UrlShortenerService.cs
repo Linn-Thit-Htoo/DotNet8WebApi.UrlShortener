@@ -5,14 +5,37 @@ namespace DotNet8WebApi.UrlShortener.Services;
 public class UrlShortenerService : IUrlShortenerService
 {
     private readonly AppDbContext _context;
+    private readonly IConfiguration _configuration;
 
-    public UrlShortenerService(AppDbContext context)
+    public UrlShortenerService(AppDbContext context, IConfiguration configuration)
     {
         _context = context;
+        _configuration = configuration;
     }
 
-    public Task<string> ShortenUrl(UrlRequestDTO urlRequest, CancellationToken cs)
+    public async Task<string> ShortenUrl(UrlRequestDTO urlRequest, CancellationToken cs)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var code = Ulid.NewUlid().ToString();
+            string shortUrl = $"{_configuration.GetSection("Url").Value!}/{code}";
+
+            var url = new TblUrl()
+            {
+                Id = Ulid.NewUlid().ToString(),
+                Code = code,
+                CreatedDate = DateTime.Now,
+                LongUrl = urlRequest.LongUrl,
+                ShortUrl = shortUrl
+            };
+            await _context.TblUrls.AddAsync(url, cs);
+            await _context.SaveChangesAsync(cs);
+
+            return url.ShortUrl;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
     }
 }
