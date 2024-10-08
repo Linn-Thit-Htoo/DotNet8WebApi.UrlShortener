@@ -1,6 +1,6 @@
-﻿using DotNet8WebApi.UrlShortener.Models;
-using DotNet8WebApi.UrlShortener.Services;
-using Microsoft.AspNetCore.Mvc;
+﻿global using DotNet8WebApi.UrlShortener.Models;
+global using DotNet8WebApi.UrlShortener.Services;
+global using Microsoft.AspNetCore.Mvc;
 
 namespace DotNet8WebApi.UrlShortener.Controllers
 {
