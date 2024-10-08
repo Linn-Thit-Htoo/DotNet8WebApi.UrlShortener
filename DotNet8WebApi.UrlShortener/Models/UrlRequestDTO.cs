@@ -1,7 +1,6 @@
-﻿namespace DotNet8WebApi.UrlShortener.Models
+﻿namespace DotNet8WebApi.UrlShortener.Models;
+
+public class UrlRequestDTO
 {
-    public class UrlRequestDTO
-    {
-        public string LongUrl { get; set; } = null!;
-    }
+    public string LongUrl { get; set; } = null!;
 }
