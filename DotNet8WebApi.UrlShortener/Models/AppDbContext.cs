@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace DotNet8WebApi.UrlShortener.Models;
+﻿namespace DotNet8WebApi.UrlShortener.Models;
 
 public partial class AppDbContext : DbContext
 {
