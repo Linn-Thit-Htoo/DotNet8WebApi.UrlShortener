@@ -26,7 +26,10 @@ public class UrlController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> ShortenUrl([FromBody] UrlRequestDTO urlRequest, CancellationToken cs)
+    public async Task<IActionResult> ShortenUrl(
+        [FromBody] UrlRequestDTO urlRequest,
+        CancellationToken cs
+    )
     {
         try
         {
