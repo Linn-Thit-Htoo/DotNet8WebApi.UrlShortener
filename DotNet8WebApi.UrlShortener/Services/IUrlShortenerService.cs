@@ -1,8 +1,7 @@
-﻿namespace DotNet8WebApi.UrlShortener.Services
+﻿namespace DotNet8WebApi.UrlShortener.Services;
+
+public interface IUrlShortenerService
 {
-    public interface IUrlShortenerService
-    {
-        Task<string> ShortenUrl(UrlRequestDTO urlRequest, CancellationToken cs);
-        Task<string> GetLongUrl(string code, CancellationToken cs);
-    }
+    Task<string> ShortenUrl(UrlRequestDTO urlRequest, CancellationToken cs);
+    Task<string> GetLongUrl(string code, CancellationToken cs);
 }
