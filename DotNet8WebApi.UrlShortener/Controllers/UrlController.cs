@@ -1,8 +1,6 @@
 ﻿using DotNet8WebApi.UrlShortener.Models;
 using DotNet8WebApi.UrlShortener.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 
 namespace DotNet8WebApi.UrlShortener.Controllers
 {
