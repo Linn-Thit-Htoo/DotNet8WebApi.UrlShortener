@@ -15,7 +15,10 @@ public class UrlShortenerService : IUrlShortenerService
     {
         try
         {
-            var item = await _context.TblUrls.FirstOrDefaultAsync(x => x.Code == code, cancellationToken: cs);
+            var item = await _context.TblUrls.FirstOrDefaultAsync(
+                x => x.Code == code,
+                cancellationToken: cs
+            );
             ArgumentNullException.ThrowIfNull(item);
 
             return item.LongUrl;
